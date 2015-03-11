@@ -1,0 +1,41 @@
+﻿TEAMOPTIMEL	Battleship
+
+– Kamil Zukowski
+– Leon Graumans
+– Johan Groenewold
+
+Description
+Battleship is a guessing game in which you try to sink your opponent's battleships.
+
+Ship
+– Knows if it is hit or not
+– has status: knows if it is floating or it is sunk
+– 2 ships of two units, 2 ships of three units and 2 ships of four units
+– Each ship represents a word
+
+Board
+– Fleet 10 by 10 Grid
+– Knows the status of each ship
+– Needs to inform opponent's board about each time hit
+
+Person
+– Can place ships
+– Can fire missiles at coordinates 
+
+Rules
+– A player can have 6 ships:
+	2 Destroyers (size 2)
+	2 Cruisers (size 3)
+	2 Battleships (size 4)
+– Ships cannot be placed on another ship
+– Ships must be placed inside the dimensions of the grid
+– The player who sinks alle enemy ships first is the winner
+
+(Voorlopige) taakverdeling
+Kamil		Grid maken in PyQt Gui
+Leon		Functie ships plaatsen
+Johan		Functie missiles schieten
+
+Dit is de voorlopige taakverdeling, de definitieve taakverdeling volgt nog na overleg.
+
+
