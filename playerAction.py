@@ -18,9 +18,14 @@ from collections import namedtuple
 
 class NewPlayer:
     def __init__(self, name):
-        """ name wordt meegegeven aan de __init__, shipCoords is een lege list """
+        """
+        name is de gebruikersnaam en wordt meegegeven aan de __init__
+        shipCoords is een list voor de coordinaten van de eigen schepen
+        shotsFired is een list met coordinaten en resultaten van eigen schoten
+        """
         self.name = name
         self.shipCoords = []
+        self.shotsFired = []
     
     def placeShips(self, coordsList):
         """
@@ -42,8 +47,9 @@ class NewPlayer:
 def fireMissile(username, x, y):
     """ Vuur een missile op een username op locatie (x, y) """
     targetUser = username
-    
-    return targetUser.shipOnCoordinate(x, y)
+    missileResult = targetUser.shipOnCoordinate(x, y)
+ 
+    return missileResult
 
 
 # Om te testen:
