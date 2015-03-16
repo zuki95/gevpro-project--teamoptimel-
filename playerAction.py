@@ -96,13 +96,24 @@ def main():
     shipList.append(myFirstRealShipOMG)
     player.placeShips(shipList)
     
-    # Returnt False (want schip is op (2,6))
+    # Returnt 1 (want schip is op (2,6))
     print(fireMissile(player, (3, 6)))
     
     # Returnt de letter "L"
     print(fireMissile(player, (2, 6)))
     
     # Returnt de huidige enemyGrid-lijst
-    print(player.enemyGrid)
+    #print(player.enemyGrid)
+    
+    # Print een overzichtelijke enemyGrid
+    gridList = ""
+    for x in range(10):
+        for y in range(10):
+            number = (x * 10) + y
+            gridList += str(player.enemyGrid[number][1]) + " "
+        
+        gridList += "\n"
+    
+    print(gridList)
     
 main()
