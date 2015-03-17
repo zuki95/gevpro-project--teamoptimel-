@@ -2,6 +2,14 @@
 enemyGrid is hier een lege lijst waar enkel coördinaten in worden gezet
 van missiles die zijn geschoten. Alle item zijn lists met coördinaten en
 wel of geen hit ([x, y, 0] of [x, y, 1]).
+
+
+
+Momenteel zet de computer zn boten soms op grid-punt 11, terwijl het maar
+tot 10 loopt.. Iemand een geniale oplossing?
+
+Het afvuren van missiles is ook pittig, want de computer moet weten wannneer
+een boot is gezonken en dan verder gaan met nieuwe boten vinden ;(
 """
 
 from collections import namedtuple
@@ -24,7 +32,7 @@ class ComputerPlayer:
     
     def placeShips(self):
         """ Zet schepen op random plekken neer """
-        for i in range(2, 4):
+        for i in range(2, 5):
             for j in range(2):
                 xCoord = randrange(0, 10)
                 yCoord = randrange(0, 10)
@@ -33,7 +41,13 @@ class ComputerPlayer:
                 
                 newShip = self.createShip(xCoord, yCoord, i, random, [])
                 
-                self.shipCoords.extend(newShip)
+                if (newShip):
+                    self.shipCoords.extend(newShip)
+                else:
+                    xCoord = randrange(0, 10)
+                    yCoord = randrange(0, 10)
+                    random = bool(getrandbits(1))
+                    newShip = self.createShip(xCoord, yCoord, i, random, [])
     
     
     def createShip(self, xCoord, yCoord, shipSize, isHorizontal, shipCoordsList):
@@ -47,7 +61,7 @@ class ComputerPlayer:
             return shipCoordsList
         
         if(self.shipOnCoordinate((xCoord, yCoord))):
-            return 0
+            return False
         
         shipCoordsList.append((xCoord, yCoord))
         
@@ -72,7 +86,7 @@ class ComputerPlayer:
     
     def updateEnemyGrid(self, coordTuple, result):
         """ update de enemyGrid met een nieuwe status """
-        self.enemyGrid.append([coordTuple[0], coordTuple[1], result)
+        self.enemyGrid.append([coordTuple[0], coordTuple[1], result]    )
         
 
 def fireAIMissile(computerPlayer):
@@ -97,7 +111,6 @@ def fireAIMissile(computerPlayer):
 # Om te testen:
 def main():
     player = ComputerPlayer("johan", 1)
-    
     print(player.shipCoords)
     
 main()
