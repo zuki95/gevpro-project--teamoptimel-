@@ -20,20 +20,24 @@ class Board(QWidget):
             itemStr = str(item[1])
             if (itemStr == "0"):
                 itemLabel = QPushButton("Fire!")
+                itemLabel.clicked.connect(lambda: fireMissile(player, item[0]))
             elif (itemStr == "1"):
                 itemLabel = QLabel("-")
             else:
                 itemLabel = QLabel(itemStr)
             
             itemLabel.setMaximumWidth(40)
-            itemLabel.setStyleSheet("float: center;")
+            itemLabel.setStyleSheet("border: 2px solid #000;")
+         
             grid.addWidget(itemLabel, item[0][0], item[0][1])
-        #itemLabel.clicked.connect(lambda: fireMissile(player, item[0]))
+        
+        #for item in player.shipCoords
+        
         self.setLayout(grid)
-        self.show()
 
 if __name__ == "__main__":
     player = NewPlayer("johan")
+    """
     BattleShip = namedtuple("BattleShip", "x, y, letter")
     shipList = []
     
@@ -50,10 +54,11 @@ if __name__ == "__main__":
     print(fireMissile(player, (4, 5)))
     print(fireMissile(player, (8, 2)))
     
-    
+    """
     app = QApplication(sys.argv)
     f = Board()
-    sys.exit(app.exec_())
+    f.show()
+    app.exec()
     
     
     # Print een overzichtelijke enemyGrid

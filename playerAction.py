@@ -50,8 +50,8 @@ class NewPlayer:
         self.enemyGrid = []
         
         # Fill a list with all grid points and set them empty for the time being
-        for x in range(10):
-            for y in range(10):
+        for y in range(10):
+            for x in range(10):
                 tempList = [(x, y), 0]
                 self.enemyGrid.append(tempList)
     
@@ -76,16 +76,16 @@ class NewPlayer:
                 gridItem[1] = statusStr
 
 
-def fireMissile(username, coordTuple):
+def fireMissile(board, username, coordTuple):
     """ Vuur een missile op een username op locatie (x, y) """
     targetUser = username
     missileResult = targetUser.shipOnCoordinate(coordTuple)
     
     targetUser.updateEnemyGrid(coordTuple, missileResult)
- 
+    board.buildGrids()
     return missileResult
 
-
+"""
 # Om te testen:
 def main():
     player = NewPlayer("johan")
@@ -117,3 +117,4 @@ def main():
     print(gridList)
     
 main()
+"""
