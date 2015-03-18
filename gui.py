@@ -52,7 +52,7 @@ class GridView(QWidget):
             itemLabel.setMaximumWidth(40)
             itemLabel.setStyleSheet("border: 1px solid #000;")
          
-            self.enemyLayout.addWidget(itemLabel, item[0][0], item[0][1])
+            self.enemyLayout.addWidget(itemLabel, xCoord, yCoord)
         
         # Build the own grid
         for y in range(10):
