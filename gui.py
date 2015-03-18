@@ -66,13 +66,27 @@ class GridView(QWidget):
                     shipLabel.setStyleSheet("border: 1px solid darkgrey;")
                     self.ownLayout.addWidget(shipLabel, y, x)
 
+    def rebuildUI(self, sender, coordTuple, result):
+        #self.enemyLayout.removeWidget(self.enemyLayout.itemAtPosition(coordTuple[0], coordTuple[1]))
+        self.enemyLayout.removeWidget(sender)
+        sender.deleteLater()
+        print(sender)
+        #print(cItem)
+        cItem = QLabel(str(result))
+        self.enemyLayout.addWidget(cItem, coordTuple[1], coordTuple[0])
+        print(cItem)
+        
+        
     def prepareMissile(self):
         sender = self.sender()
         sendTuple = tuple(sender.text())
+        sendSum = int(sendTuple[0]) + int(sendTuple[1])
         sendTuple = tuple((int(sendTuple[0]), int(sendTuple[1])))
         print(sendTuple)
         
         res = fireMissile(player, sendTuple)
+        #self.rebuildUI(sendTuple, res)
+        self.rebuildUI(sender, sendTuple, res)
         self.enemyLayout.update()
         print(res)
 

@@ -60,7 +60,7 @@ class ComputerPlayer:
         if(len(shipCoordsList) == shipSize):
             return shipCoordsList
         
-        if(self.shipOnCoordinate((xCoord, yCoord))):
+        if ((self.shipOnCoordinate((xCoord, yCoord))) or not ( 0 <= xCoord < 10) or not ( 0 <= yCoord < 10)):
             xCoord = randrange(0, 10)
             yCoord = randrange(0, 10)
             random = bool(getrandbits(1))

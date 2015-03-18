@@ -65,7 +65,7 @@ class NewPlayer:
         """ checkt of er een schip is op de plek van het schot """
         for ship in self.shipCoords:
             if ((str(ship.x) == str(coordTuple[0])) and (str(ship.y) == str(coordTuple[1]))):
-                return ship.letter 
+                return ship.letter
         return 1
     
     def updateEnemyGrid(self, coordTuple, statusStr):
@@ -74,8 +74,6 @@ class NewPlayer:
             if (gridItem[0] == coordTuple):
                 gridItem[1] = statusStr
             
-            
-
 
 def fireMissile(username, coordTuple):
     """ Vuur een missile op een username op locatie (x, y) """
