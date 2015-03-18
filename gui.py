@@ -42,7 +42,7 @@ class GridView(QWidget):
             yCoord = item[0][1]
             if (itemStr == "0"):
                 itemLabel = QPushButton(str(item[0][0]) + ";" + str(item[0][1]))
-                itemLabel.clicked.connect(self.prepareMissile())
+                itemLabel.clicked.connect(lambda: self.prepareMissile())
             elif (itemStr == "1"):
                 itemLabel = QLabel("-")
             else:
