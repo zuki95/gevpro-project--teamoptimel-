@@ -36,12 +36,13 @@ class GridView(QWidget):
         
     def buildGrids(self):
         # Build the enemy grid
-        for item in player.enemyGrid:
+        for i, item in enumerate(player.enemyGrid):
             itemStr = str(item[1])
             xCoord = item[0][0]
             yCoord = item[0][1]
+            row, col = divmod(i, 10)
             if (itemStr == "0"):
-                itemLabel = QPushButton(str(item[0][0]) + ";" + str(item[0][1]))
+                itemLabel = QPushButton(str(col) + "," + str(row), self)
                 itemLabel.clicked.connect(lambda: self.prepareMissile())
             elif (itemStr == "1"):
                 itemLabel = QLabel("-")
@@ -67,8 +68,7 @@ class GridView(QWidget):
 
     def prepareMissile(self):
         sender = self.sender()
-        #print(sender)
-        #print(sender.text())
+        print(sender.text())
 
 if __name__ == "__main__":
     player = NewPlayer("johan")

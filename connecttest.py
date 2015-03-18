@@ -13,7 +13,7 @@ class ButtonBlock(QtGui.QWidget):
                  '0,0', '0,1', '0,2', '0,3', '0,4', '', '1,0', '1,1', '1,2', '1,3', '1,4',
                  '0,0', '0,1', '0,2', '0,3', '0,4', '', '1,0', '1,1', '1,2', '1,3', '1,4',
                  '1,0', '1,1', '1,2', '1,3', '1,4', '', '1,0', '1,1', '1,2', '1,3', '1,4')
-        for i, name in enumerate(names):
+        for i, name in names:
             button = QtGui.QPushButton(name, self)
             button.clicked.connect(self.make_calluser(name))
             row, col = divmod(i, 11)
