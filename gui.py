@@ -28,7 +28,7 @@ class GridView(QWidget):
         fireBtn = QPushButton("Fire!")
         
         mainLayout.addLayout(self.enemyLayout, 0, 0)
-        mainLayout.addLayout(self.ownLayout, 1, 0)
+        mainLayout.addLayout(self.ownLayout, 0, 1)
         mainLayout.addWidget(fireBtn, 2, 0)
         
 
@@ -42,7 +42,7 @@ class GridView(QWidget):
             yCoord = item[0][1]
             row, col = divmod(i, 10)
             if (itemStr == "0"):
-                itemLabel = QPushButton(str(col) + "," + str(row), self)
+                itemLabel = QPushButton(str(col) + str(row), self)
                 itemLabel.clicked.connect(lambda: self.prepareMissile())
             elif (itemStr == "1"):
                 itemLabel = QLabel("-")
@@ -68,7 +68,11 @@ class GridView(QWidget):
 
     def prepareMissile(self):
         sender = self.sender()
-        print(sender.text())
+        sendTuple = tuple(sender.text())
+        res = fireMissile(player, sendTuple)
+        self.enemyLayout.update()
+        #self.buildGrids()
+        print(res)
 
 if __name__ == "__main__":
     player = NewPlayer("johan")

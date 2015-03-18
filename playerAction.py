@@ -64,9 +64,8 @@ class NewPlayer:
     def shipOnCoordinate(self, coordTuple):
         """ checkt of er een schip is op de plek van het schot """
         for ship in self.shipCoords:
-            if ((ship.x == coordTuple[0]) and (ship.y == coordTuple[1])):
-                return ship.letter
-                
+            if ((str(ship.x) == str(coordTuple[0])) and (str(ship.y) == str(coordTuple[1]))):
+                return ship.letter 
         return 1
     
     def updateEnemyGrid(self, coordTuple, statusStr):
@@ -76,13 +75,12 @@ class NewPlayer:
                 gridItem[1] = statusStr
 
 
-def fireMissile(board, username, coordTuple):
+def fireMissile(username, coordTuple):
     """ Vuur een missile op een username op locatie (x, y) """
     targetUser = username
     missileResult = targetUser.shipOnCoordinate(coordTuple)
-    
+    print(coordTuple)
     targetUser.updateEnemyGrid(coordTuple, missileResult)
-    board.buildGrids()
     return missileResult
 
 """
