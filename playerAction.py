@@ -73,13 +73,14 @@ class NewPlayer:
         for gridItem in self.enemyGrid:
             if (gridItem[0] == coordTuple):
                 gridItem[1] = statusStr
+            
+            
 
 
 def fireMissile(username, coordTuple):
     """ Vuur een missile op een username op locatie (x, y) """
     targetUser = username
     missileResult = targetUser.shipOnCoordinate(coordTuple)
-    print(coordTuple)
     targetUser.updateEnemyGrid(coordTuple, missileResult)
     return missileResult
 

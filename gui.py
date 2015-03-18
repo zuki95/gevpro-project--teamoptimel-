@@ -52,7 +52,7 @@ class GridView(QWidget):
             itemLabel.setMaximumWidth(40)
             itemLabel.setStyleSheet("border: 1px solid #000;")
          
-            self.enemyLayout.addWidget(itemLabel, xCoord, yCoord)
+            self.enemyLayout.addWidget(itemLabel, yCoord, xCoord)
         
         # Build the own grid
         for y in range(10):
@@ -69,9 +69,11 @@ class GridView(QWidget):
     def prepareMissile(self):
         sender = self.sender()
         sendTuple = tuple(sender.text())
+        sendTuple = tuple((int(sendTuple[0]), int(sendTuple[1])))
+        print(sendTuple)
+        
         res = fireMissile(player, sendTuple)
         self.enemyLayout.update()
-        #self.buildGrids()
         print(res)
 
 if __name__ == "__main__":
