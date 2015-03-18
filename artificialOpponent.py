@@ -61,8 +61,10 @@ class ComputerPlayer:
             return shipCoordsList
         
         if(self.shipOnCoordinate((xCoord, yCoord))):
-            return False
-        
+            xCoord = randrange(0, 10)
+            yCoord = randrange(0, 10)
+            random = bool(getrandbits(1))
+            return self.createShip(xCoord, yCoord, shipSize, random, [])
         shipCoordsList.append((xCoord, yCoord))
         
         if (isHorizontal):
