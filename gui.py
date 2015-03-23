@@ -21,17 +21,22 @@ class GridView(QWidget):
         self.enemyLayout.setSpacing(0)
         self.ownLayout = QGridLayout()
         self.ownLayout.setSpacing(0)
-        
         self.buildGrids()
         
         # Build main grid
         fireBtn = QPushButton("Fire!")
+        placeShip = QPushButton("Place Ship")
+        placeShip.clicked.connect(lambda: self.placeShip())
+        directionBtn = QPushButton("Horizontal", self)
+        directionBtn.clicked.connect(lambda: self.direction())
         
         mainLayout.addLayout(self.enemyLayout, 0, 0)
         mainLayout.addLayout(self.ownLayout, 0, 1)
         mainLayout.addWidget(fireBtn, 2, 0)
+        mainLayout.addWidget(placeShip, 4, 0)
+        mainLayout.addWidget(directionBtn, 5, 0)
         
-
+        
         self.setLayout(mainLayout)
         
     def buildGrids(self):
@@ -70,12 +75,21 @@ class GridView(QWidget):
         #self.enemyLayout.removeWidget(self.enemyLayout.itemAtPosition(coordTuple[0], coordTuple[1]))
         self.enemyLayout.removeWidget(sender)
         sender.deleteLater()
-        print(sender)
+        #print(sender)
         #print(cItem)
         cItem = QLabel(str(result))
         self.enemyLayout.addWidget(cItem, coordTuple[1], coordTuple[0])
-        print(cItem)
+        #print(cItem)
+    
+    def placeShip(self):
+        print("Hey")
         
+    def direction(self):
+        if self.directionBtn.text() == "Horizontal":
+            self.directionBtn.setText("Vertical")
+        else:
+            self.directionBtn.setText("Horizontal")
+		
         
     def prepareMissile(self):
         sender = self.sender()
