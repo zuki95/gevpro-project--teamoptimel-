@@ -30,9 +30,11 @@ class GridView(QWidget):
         mainLayout.addLayout(self.enemyLayout, 0, 0)
         mainLayout.addLayout(self.ownLayout, 0, 1)
         mainLayout.addWidget(fireBtn, 2, 0)
-        
+        self.setWindowTitle("Battleships")
+        self.setGeometry(300, 300, 800, 300)
 
         self.setLayout(mainLayout)
+        
         
     def buildGrids(self):
         # Build the enemy grid
