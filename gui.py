@@ -33,16 +33,13 @@ class GridView(QWidget):
         mainLayout.addLayout(self.enemyLayout, 0, 0)
         mainLayout.addLayout(self.ownLayout, 0, 1)
         mainLayout.addWidget(fireBtn, 2, 0)
-<<<<<<< HEAD
+
         mainLayout.addWidget(placeShip, 4, 0)
         mainLayout.addWidget(directionBtn, 5, 0)
         
-        
-=======
         self.setWindowTitle("Battleships")
         self.setGeometry(300, 300, 800, 300)
 
->>>>>>> a5dc207c8e7a33cbc8e20f4c72631d5bbda74b64
         self.setLayout(mainLayout)
         
         
