@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-#Kamil Zukowski
-
 import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -11,10 +9,33 @@ class GridView(QWidget):
 
     def __init__(self):
         super(GridView,self).__init__()
-        
+        self.player = player1
+        player1.buildPlayerGrids()
+        player2.buildPlayerGrids()
         self.buildUI()
         
     def buildUI(self):
+
+        self.mainLayout = QGridLayout()
+        self.mainLayout.setSpacing(5)
+        self.fireBtn = QPushButton("Fire!")
+        
+        self.mainLayout.addLayout(self.player.enemyLayout, 0, 0)
+        self.mainLayout.addLayout(self.player.ownLayout, 0, 1)
+        self.mainLayout.addWidget(self.fireBtn, 2, 0)
+        self.setLayout(self.mainLayout)
+    
+    def popupWindow(self):
+        popupWin = QMessageBox(self)
+        popupWin.setWindowTitle("Change players")
+        popupWin.setText("Your turn is over. MOVE YOUR FUCKING ASS BRAH!")
+        popupWin.exec()
+        #self.player.enemyLayoutParent.hide()
+        #self.player.enemyLayoutParent.show()
+        #print(self.player.enemyLayout.parentWidget())
+        self.changeTurns()
+        self.buildUI()
+
         mainLayout = QGridLayout()
         mainLayout.setSpacing(5)
         self.enemyLayout = QGridLayout()
@@ -38,14 +59,13 @@ class GridView(QWidget):
         mainLayout.addWidget(directionBtn, 5, 0)
         
         self.setWindowTitle("Battleships")
-        self.setGeometry(300, 300, 800, 300)
-
+        #self.setGeometry(300, 300, 800, 300)
         self.setLayout(mainLayout)
         
         
     def buildGrids(self):
         # Build the enemy grid
-        for i, item in enumerate(player.enemyGrid):
+        for i, item in enumerate(self.player.enemyGrid):
             itemStr = str(item[1])
             xCoord = item[0][0]
             yCoord = item[0][1]
@@ -66,7 +86,7 @@ class GridView(QWidget):
         # Build the own grid
         for y in range(10):
             for x in range(10):
-                for item in player.shipCoords:
+                for item in self.player.shipCoords:
                     if ((item.x == x) and (item.y == y)):
                         shipLabel = QLabel(item.letter)
                     else:
@@ -76,6 +96,7 @@ class GridView(QWidget):
                     self.ownLayout.addWidget(shipLabel, y, x)
 
     def rebuildUI(self, sender, coordTuple, result):
+        #self.enemyLayout.removeWidget(self.enemyLayout.itemAtPosition(coordTuple[0], coordTuple[1]))
         #self.enemyLayout.removeWidget(self.enemyLayout.itemAtPosition(coordTuple[0], coordTuple[1]))
         self.enemyLayout.removeWidget(sender)
         sender.deleteLater()
@@ -102,14 +123,17 @@ class GridView(QWidget):
         sendTuple = tuple((int(sendTuple[0]), int(sendTuple[1])))
         print(sendTuple)
         
-        res = fireMissile(player, sendTuple)
-        #self.rebuildUI(sendTuple, res)
-        self.rebuildUI(sender, sendTuple, res)
-        self.enemyLayout.update()
-        print(res)
+    def changeTurns(self):
+        if (self.player == player1):
+            self.player = player2
+        else:
+            self.player = player1
+        print('switch')
 
 if __name__ == "__main__":
-    player = NewPlayer("johan")
+    app = QApplication(sys.argv)
+    player1 = NewPlayer("johan")
+    player2 = NewPlayer("nietjohan")
     
     BattleShip = namedtuple("BattleShip", "x, y, letter")
     shipList = []
@@ -139,22 +163,14 @@ if __name__ == "__main__":
     shipList.append(ship10)
     shipList.append(ship11)
     shipList.append(ship12)
-    player.placeShips(shipList)
+    player1.placeShips(shipList)
+    player2.placeShips(shipList)
     
-    print(shipList)
     
-    """
-    print(fireMissile(player, (1, 6)))
-    print(fireMissile(player, (2, 6)))
-    print(fireMissile(player, (3, 6)))
-    print(fireMissile(player, (4, 6)))
-    print(fireMissile(player, (4, 5)))
-    print(fireMissile(player, (8, 2)))
-    
-    """
-    app = QApplication(sys.argv)
-    f = GridView()
-    f.show()
+    board = GridView()
+    board.show()
+    player1.board = board
+    player2.board = board
     app.exec()
     
     
@@ -163,7 +179,18 @@ if __name__ == "__main__":
     for x in range(10):
         for y in range(10):
             number = (x * 10) + y
-            gridList += str(player.enemyGrid[number][1]) + " "
+            gridList += str(player1.enemyGrid[number][1]) + " "
+        
+        gridList += "\n"
+    
+    print(gridList)
+    
+    # Print een overzichtelijke enemyGrid
+    gridList = ""
+    for x in range(10):
+        for y in range(10):
+            number = (x * 10) + y
+            gridList += str(player2.enemyGrid[number][1]) + " "
         
         gridList += "\n"
     
