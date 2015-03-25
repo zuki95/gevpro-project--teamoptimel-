@@ -29,6 +29,21 @@ class ComputerPlayer:
         
         self.placeShips()
     
+    def randomWord(num):
+        if (num == 2):
+            wordList = ["op", "af", "en", "ik", "we", "de", "je", "of", "as", 
+            "al", "la", "nu", "af", "pa", "ma", "ex"]
+        elif (num == 3):
+            wordList = ["het", "dit", "wat", "wit", "rat", "bad", "bak", "kap", 
+            "pik", "sex", "dat", "lol", "lip", "pil", "wil", "bam", "map", "wij",
+            "jij", "hij", "zij", "mus", "ben"]
+        else:
+            wordList = ["waar", "trut", "shit", "mits", "stem", "pets", "seks",
+            "date", "homo", "mens", "heks", "geel", "vlug", "stil", "haha"]
+        
+        randomWord = wordList[randrange(0, len(wordList))]
+    
+    return randomWord
     
     def placeShips(self):
         """ Zet schepen op random plekken neer """
@@ -38,17 +53,12 @@ class ComputerPlayer:
                 yCoord = randrange(0, 10)
                 random = bool(getrandbits(1))
                 # random True/False for horizontal versus vertical placement
+                shipWord = list(randomWord(i))
                 
                 newShip = self.createShip(xCoord, yCoord, i, random, [])
                 
-                if (newShip):
-                    self.shipCoords.extend(newShip)
-                else:
-                    xCoord = randrange(0, 10)
-                    yCoord = randrange(0, 10)
-                    random = bool(getrandbits(1))
-                    newShip = self.createShip(xCoord, yCoord, i, random, [])
-    
+                for i in newShip:
+                    self.shipCoords.append([newShip, shipWord[i]])
     
     def createShip(self, xCoord, yCoord, shipSize, isHorizontal, shipCoordsList):
         """
