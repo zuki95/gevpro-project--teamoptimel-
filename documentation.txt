@@ -1,7 +1,8 @@
 Project Battleships
 Johan Groenewold, Leon Graumans en Kamil Zukowski
 
-
+3 bestanden: playerAction.py, artifficialOpponent.py en game.py.
+De game is te runnen vanuit game.py
 
 """
 NewPlayer wordt voor elke speler aangemaakt bij het starten van een spel. De
