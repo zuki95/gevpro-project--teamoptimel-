@@ -1,0 +1,79 @@
+Project Battleships
+Johan Groenewold, Leon Graumans en Kamil Zukowski
+
+
+
+"""
+NewPlayer wordt voor elke speler aangemaakt bij het starten van een spel. De
+class houdt alle gegevens van een speler bij (de GUI kan hier dus de gegevens
+uit halen om weer te geven).
+
+Ingebouwde variabelen:
+    name            Naam (wordt aangeroepen bij initialiseren)
+    shipCoords      Coordinaten van de schepen van de gebruiker als
+                    namedtuple (x, y, letter)
+    enemyGrid       Een list van lists. Deze lists bevatten een tuple
+                    voor de coordinaten en een item voor de waarde,
+                    bv: [(2, 6), "H"]. Dit lijkt omslachtig, maar omdat
+                    tuples immutable zijn is een een (named)tuple hier
+                    niet te gebruiken.
+
+Ingebouwde methoden:
+    placeShips:     Voor het plaatsen van schepen. Moet een lijst van namedtuples
+                    krijgen: ... = namedtuple('...', 'x, y, letter')
+    
+    shipOnCoordinate: Checkt of er op het opgegeven coordinaat een schip aanwezig
+                    is. Krijgt coordinaten als tuple (x, y) mee en returnt de
+                    eventuele letter of False.
+    
+    updateEnemyGrid: Werkt het resultaat van een schot bij in de enemyGrid lijst.
+    
+Enkele tips:
+    Coordinaten:    Altijd weergeven als tuple. Dit is overzichtelijk (want
+                    is gelijk wiskunde notatie (x, y)) en bovendien immutable
+                    dus niet per ongeluk te verpesten met een fout stukje code.
+    
+    Opbouw grid:    De grid kan worden opgebouwd uit de self.enemyGrid lijst.
+                    Deze lijst bevat, naast de coordinaten, ook een 'status':
+                    0:      Nog geen missile op deze coordinaten afgevuurd
+                    1:      Wel een missile afgevuurd, maar geen hit
+                    "x":    Missile was een hit, de status bevat nu de
+                            corresponderende letter.
+    
+"""
+
+
+"""
+# Om te testen:
+def main():
+    player = NewPlayer("johan")
+    BattleShip = namedtuple("BattleShip", "x, y, letter")
+    shipList = []
+    
+    myFirstRealShipOMG = BattleShip(2, 6, "L")
+    shipList.append(myFirstRealShipOMG)
+    player.placeShips(shipList)
+    
+    # Returnt 1 (want schip is op (2,6))
+    print(fireMissile(player, (3, 6)))
+    
+    # Returnt de letter "L"
+    print(fireMissile(player, (2, 6)))
+    
+    # Returnt de huidige enemyGrid-lijst
+    #print(player.enemyGrid)
+    
+    # Print een overzichtelijke enemyGrid
+    gridList = ""
+    for x in range(10):
+        for y in range(10):
+            number = (x * 10) + y
+            gridList += str(player.enemyGrid[number][1]) + " "
+        
+        gridList += "\n"
+    
+    print(gridList)
+    
+main()
+"""
+
