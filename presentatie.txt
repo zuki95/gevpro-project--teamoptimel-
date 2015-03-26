@@ -1,0 +1,13 @@
+Battleships
+
+Drie bestanden, game.py artificialOpponent.py en playerAction.py.
+
+We begonnen met een interface met een table. We kregen wel een mooie layout, maar waar we tegen aanliepen was het connecten van de vakjes. Daardoor hebben we gekozen voor een gridlayout met buttons. Dus als je nu vuurt, krijg je als resultaat of een 1, wat staat voor een misser, of de letter van de boot. 
+
+Op het moment hebben we de computerboten nog liggen zoals we die zelf hebben neergelegd, ze worden dus nog niet random neergelegd. De functie die random coordinaten genereert voor de boten en hun lengte, werkt wel, maar die hebben we niet kunnen connecten aan het enemy grid. Dus nu liggen de schepen van de computer op de plek van onze eigen schepen. 
+
+Je kan op het moment wel vuren op de boten van de tegenstander. Dit gebeurt nu nog met een klikactie. In playerAction.py controleert het programma of je daadwerkelijk een boot geraakt hebt ja of nee. Het resultaat wordt gereturnt, en het gridlayout wordt geupdated met of een 1 of de desbetreffende letter.
+
+We hadden vanaf het begin wel een goede opzet gemaakt, een duidelijk idee en taakverdeling. Maar in de praktijk werd het te moeilijk en maakten we groter dan nodig. 
+
+EINDE
