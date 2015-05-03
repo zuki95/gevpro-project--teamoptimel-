@@ -2,7 +2,7 @@
 
 #########################################################################
 #   This Battleships game is programmed by:                             #
-#   Leon Graumans       l.graumans@student.rug.nl                       #
+#   Leon Graumans       l.r.n.graumans@student.rug.nl                   #
 #   Johan Groenewold    j.groenewold.1@student.rug.nl                   #
 #   Kamil Zukowski      k.zukowski@student.rug.nl                       #
 #                                                                       #
