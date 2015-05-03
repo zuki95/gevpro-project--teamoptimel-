@@ -32,7 +32,7 @@ class ComputerPlayer:
                 random = bool(getrandbits(1))
                 # random True/False for horizontal versus vertical placement
                 
-                randWord = randomWord(i)
+                randWord = randomWord(i, 0)
                 newShip = self.createShip(xCoord, yCoord, i, random, [])
                 
                 loopcount = 0
@@ -122,12 +122,15 @@ class GameView(QWidget):
         # Build main grid
         self.statusBar = QLabel("Click somewhere on the left grid to fire")
         self.statusBar.setStyleSheet("font-size: 16px;")
+        self.dictionary = QPushButton("Possible words", self)
+        self.dictionary.clicked.connect(lambda: self.openWordList())
         
         layoutWrapper = QGridLayout()
         layoutWrapper.addLayout(self.enemyLayout, 0, 0)
         layoutWrapper.addLayout(self.ownLayout, 0, 1)
         mainLayout.addLayout(layoutWrapper, 0, 0)
         mainLayout.addWidget(self.statusBar, 1, 0)
+        mainLayout.addWidget(self.dictionary, 2, 0)
         self.resize(800, 300)
         self.setLayout(mainLayout)
         
@@ -170,6 +173,7 @@ class GameView(QWidget):
         sender.deleteLater()
         cItem = QLabel(str(result))
         cItem.setStyleSheet("background: black; color: white; font-weight: bold;")
+        cItem.setAlignment(Qt.AlignCenter)
         self.enemyLayout.addWidget(cItem, coordTuple[1], coordTuple[0])
     
     def rebuildUIbyPC(self, coordTuple, result):
@@ -193,6 +197,29 @@ class GameView(QWidget):
         returnedX, returnedY, returnedResult = fireAIMissile(player2)
         self.rebuildUIbyPC((returnedX, returnedY), returnedResult)
     
+    def openWordList(self):
+        wordsLength2 = randomWord(2, 1)
+        wordsLength3 = randomWord(3, 1)
+        wordsLength4 = randomWord(4, 1)
+        
+        buildString = "All the possible words are: \n \n"
+        buildString += "Words with length 2:\n"
+        for word in wordsLength2:
+            buildString += word + ", "
+        
+        buildString += "\n\nWords with length 3:\n"
+        for word in wordsLength3:
+            buildString += word + ", "
+        
+        buildString += "\n\nWords with length 4:\n"
+        for word in wordsLength4:
+            buildString += word + ", "
+            
+            
+        self.popupDict = TriggerPopup("Word list", buildString)
+        self.popupDict.show()
+        
+        
     def endGame(self, yay):
         if (yay):
             title = "Congratulations!"
@@ -292,7 +319,7 @@ class GridView(QWidget):
         else:
             lijstvancoords = [(selectedposition[0],selectedposition[1]+i) for i in range(num)]
         
-        randWord = randomWord(num)
+        randWord = randomWord(num, 0)
         self.fillcoords(randWord, lijstvancoords)
         
     def fillcoords(self, wordList, coords):
@@ -307,6 +334,7 @@ class GridView(QWidget):
             self.ownLayout.removeWidget(pushButton)
             pushButton.deleteLater()
             cItem = QLabel(wordList[looper])
+            cItem.setAlignment(Qt.AlignCenter)
             self.ownLayout.addWidget(cItem, i[1], i[0])
             
             
@@ -382,7 +410,7 @@ def fireAIMissile(computerPlayer):
     
     return xCoord, yCoord, missileResult
 
-def randomWord(num):
+def randomWord(num, getAll):
         if (num == 2):
             wordList = ["op", "af", "en", "ik", "we", "de", "je", "of", "as", 
             "al", "la", "nu", "af", "pa", "ma", "ex"]
@@ -397,8 +425,11 @@ def randomWord(num):
         
         randomWord = wordList[randrange(0, len(wordList))]
         randomWordList = list(randomWord)
-    
-        return randomWordList
+        
+        if (getAll):
+            return wordList
+        else:
+            return randomWordList
         
 def startGame(locList):
     stage1.close()
