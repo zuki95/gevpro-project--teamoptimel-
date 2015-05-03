@@ -120,14 +120,14 @@ class GameView(QWidget):
         self.buildGrids()
         
         # Build main grid
-        self.statusBar = QLabel("Click somewhere on the left grid to fire")
+        self.statusBar = QLabel("Click somewhere on the right grid to fire")
         self.statusBar.setStyleSheet("font-size: 16px;")
         self.dictionary = QPushButton("Possible words", self)
         self.dictionary.clicked.connect(lambda: self.openWordList())
         
         layoutWrapper = QGridLayout()
-        layoutWrapper.addLayout(self.enemyLayout, 0, 0)
-        layoutWrapper.addLayout(self.ownLayout, 0, 1)
+        layoutWrapper.addLayout(self.enemyLayout, 0, 1)
+        layoutWrapper.addLayout(self.ownLayout, 0, 0)
         mainLayout.addLayout(layoutWrapper, 0, 0)
         mainLayout.addWidget(self.statusBar, 1, 0)
         mainLayout.addWidget(self.dictionary, 2, 0)
