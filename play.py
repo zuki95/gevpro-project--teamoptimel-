@@ -47,7 +47,7 @@ class ComputerPlayer:
                 xCoord = randrange(0, 10)
                 yCoord = randrange(0, 10)
                 random = bool(getrandbits(1))
-                # random True/False for horizontal versus vertical placement
+                """ random True/False for horizontal versus vertical placement """
                 
                 randWord = randomWord(i, 0)
                 newShip = self.createShip(xCoord, yCoord, i, random, [])
@@ -136,7 +136,7 @@ class GameView(QWidget):
         
         self.buildGrids()
         
-        # Build main grid
+        """ Build main grid """
         self.statusBar = QLabel("Click somewhere on the right grid to fire")
         self.statusBar.setStyleSheet("font-size: 16px;")
         self.dictionary = QPushButton("Possible words", self)
@@ -156,7 +156,7 @@ class GameView(QWidget):
         self.setLayout(mainLayout)
         
     def buildGrids(self):
-        # Build the enemy grid
+        """ Build the enemy grid """
         for i, item in enumerate(player.enemyGrid):
             itemStr = str(item[1])
             xCoord = item[0][0]
@@ -175,7 +175,7 @@ class GameView(QWidget):
          
             self.enemyLayout.addWidget(itemLabel, yCoord, xCoord)
         
-        # Build the own grid
+        """ Build the own grid """
         for y in range(10):
             for x in range(10):
                 for item in player.shipCoords:
@@ -214,7 +214,7 @@ class GameView(QWidget):
         self.rebuildUI(sender, sendTuple, res)
         self.enemyLayout.update()
         
-        # Computer may fire now
+        """ Computer may fire now """
         returnedX, returnedY, returnedResult = fireAIMissile(player2)
         self.rebuildUIbyPC((returnedX, returnedY), returnedResult)
     
@@ -468,7 +468,7 @@ def startGame(locList):
     stage2.show()
 
 if __name__ == "__main__":
-    player = NewPlayer("johan")
+    player = NewPlayer("Johan")
     player2 = ComputerPlayer("Computer", 1)
 
     app = QApplication(sys.argv)

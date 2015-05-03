@@ -1,80 +1,31 @@
 Project Battleships
 Johan Groenewold, Leon Graumans en Kamil Zukowski
 
-3 bestanden: playerAction.py, artifficialOpponent.py en game.py.
-De game is te runnen vanuit game.py
+2 bestanden: playerAction.py en play.py
+De game is te runnen vanuit play.py 
 
-"""
-NewPlayer wordt voor elke speler aangemaakt bij het starten van een spel. De
-class houdt alle gegevens van een speler bij (de GUI kan hier dus de gegevens
-uit halen om weer te geven).
+Gameplay
 
-Ingebouwde variabelen:
-    name            Naam (wordt aangeroepen bij initialiseren)
-    shipCoords      Coordinaten van de schepen van de gebruiker als
-                    namedtuple (x, y, letter)
-    enemyGrid       Een list van lists. Deze lists bevatten een tuple
-                    voor de coordinaten en een item voor de waarde,
-                    bv: [(2, 6), "H"]. Dit lijkt omslachtig, maar omdat
-                    tuples immutable zijn is een een (named)tuple hier
-                    niet te gebruiken.
+Als je het spel runt vanuit play.py krijg je eerst een scherm te zien met een grid waarop je jouw schepen kan plaatsen.
+Je kan 2 schepen plaatsen met lengte 2, vervolgens 2 schepen met lengte 3 en als laatste 2 schepen met lengte 4.
+Alle schepen kunnen zowel horizontaal als verticaal worden geplaatst op het grid.
+Je plaatst een schip door te klikken op een vakje en vervolgens op de Button "Place Ship" te klikken.
+Elke schip representeert een woord wat bestaat uit 2, 3 of 4 letters.
+Deze woorden worden random toegewezen aan elk schip.
 
-Ingebouwde methoden:
-    placeShips:     Voor het plaatsen van schepen. Moet een lijst van namedtuples
-                    krijgen: ... = namedtuple('...', 'x, y, letter')
-    
-    shipOnCoordinate: Checkt of er op het opgegeven coordinaat een schip aanwezig
-                    is. Krijgt coordinaten als tuple (x, y) mee en returnt de
-                    eventuele letter of False.
-    
-    updateEnemyGrid: Werkt het resultaat van een schot bij in de enemyGrid lijst.
-    
-Enkele tips:
-    Coordinaten:    Altijd weergeven als tuple. Dit is overzichtelijk (want
-                    is gelijk wiskunde notatie (x, y)) en bovendien immutable
-                    dus niet per ongeluk te verpesten met een fout stukje code.
-    
-    Opbouw grid:    De grid kan worden opgebouwd uit de self.enemyGrid lijst.
-                    Deze lijst bevat, naast de coordinaten, ook een 'status':
-                    0:      Nog geen missile op deze coordinaten afgevuurd
-                    1:      Wel een missile afgevuurd, maar geen hit
-                    "x":    Missile was een hit, de status bevat nu de
-                            corresponderende letter.
-    
-"""
+Als de schepen zijn geplaatst krijg je een nieuw scherm te zien met 2 grids. Links je eigen grid met je schepen en rechts de enemy grid.
+Vervolgens kan je op de vakjes klikken van het rechter grid(enemy grid) om te vuren.
+Op het moment dat jij vuurt, vuurt de computer ook terug.
+Als je raak schiet krijg je op de enemy grid een letter te zien. Als je een heel schip laat zinken van de computer, dan zie je het hele woord.
+Je hebt als gebruiker nog de mogelijkheid om op de button "Possible words" te klikken, je krijgt dan een lijst met alle mogelijke woorden die in de game kunnen voorkomen.
+Je kan het spel winnen door alle schepen van de computer te laten zinken. Je kan dan ook alle woorden zien.
+Je verliest het spel als de computer al jouw schepen laat zinken.
 
 
-"""
-# Om te testen:
-def main():
-    player = NewPlayer("johan")
-    BattleShip = namedtuple("BattleShip", "x, y, letter")
-    shipList = []
-    
-    myFirstRealShipOMG = BattleShip(2, 6, "L")
-    shipList.append(myFirstRealShipOMG)
-    player.placeShips(shipList)
-    
-    # Returnt 1 (want schip is op (2,6))
-    print(fireMissile(player, (3, 6)))
-    
-    # Returnt de letter "L"
-    print(fireMissile(player, (2, 6)))
-    
-    # Returnt de huidige enemyGrid-lijst
-    #print(player.enemyGrid)
-    
-    # Print een overzichtelijke enemyGrid
-    gridList = ""
-    for x in range(10):
-        for y in range(10):
-            number = (x * 10) + y
-            gridList += str(player.enemyGrid[number][1]) + " "
-        
-        gridList += "\n"
-    
-    print(gridList)
-    
-main()
-"""
+
+
+
+
+
+
 
