@@ -1,5 +1,22 @@
 #!/usr/bin/env python
-#Kamil Zukowski
+
+#########################################################################
+#   This Battleships game is programmed by:                             #
+#   Leon Graumans       l.graumans@student.rug.nl                       #
+#   Johan Groenewold    j.groenewold.1@student.rug.nl                   #
+#   Kamil Zukowski      k.zukowski@student.rug.nl                       #
+#                                                                       #
+#   This program is released under the                                  #
+#   Creative Commons Attribution-NonCommercial 4.0 International        #
+#   license, which means everyone is allowed to copy, share, edit and   #
+#   adapt the code in any way they like, except for commercial use.     #
+#   For more information, please check:                                 #
+#   https://creativecommons.org/licenses/by-nc/4.0/                     #
+#                                                                       #
+#   Please note:                                                        #
+#   This game requires the corresponding playerAction.py file and       #
+#   PyQt version 4 or higher: http://pyqt.sourceforge.net/              #
+#########################################################################
 
 import sys
 from PyQt4.QtCore import *
